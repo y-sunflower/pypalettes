@@ -1,8 +1,5 @@
 # PyPalettes
 
-
-<!-- Automatically generated, uses README.qmd to modify README.md -->
-
 <img src="https://github.com/JosephBARBIERDARNAL/pypalettes/blob/main/images/logo.png?raw=true" alt="pypalettes logo" align="right" width="160px"/>
 
 A large (**+2500**) collection of color maps for Python.
@@ -13,7 +10,7 @@ A large (**+2500**) collection of color maps for Python.
   [official
   documentation](https://python-graph-gallery.com/introduction-to-pypalettes/).
 
-![PyPI - Downloads](https://img.shields.io/pypi/dm/pypalettes.png)
+[![](https://static.pepy.tech/badge/pypalettes)](https://pepy.tech/projects/pypalettes)
 ![Coverage badge](docs/coverage-badge.svg)
 
 <center align="left">
@@ -33,13 +30,13 @@ A large (**+2500**) collection of color maps for Python.
 
 With pip:
 
-``` bash
+```bash
 pip install pypalettes
 ```
 
 With conda:
 
-``` bash
+```bash
 conda install conda-forge::pypalettes
 ```
 
@@ -53,7 +50,7 @@ arguments.
 
 #### Continuous palette
 
-``` python
+```python
 import matplotlib.pyplot as plt
 import numpy as np
 from pypalettes import load_cmap
@@ -66,11 +63,11 @@ plt.imshow(data, cmap=cmap)
 plt.colorbar()
 ```
 
-![](README_files/figure-commonmark/cell-2-output-1.png)
+![](images/cell-2-output-1.png)
 
 #### Categorical palette
 
-``` python
+```python
 import matplotlib.pyplot as plt
 import seaborn as sns
 from pypalettes import load_cmap
@@ -89,11 +86,11 @@ g = sns.lmplot(
 )
 ```
 
-![](README_files/figure-commonmark/cell-3-output-1.png)
+![](images/cell-3-output-1.png)
 
 #### Your own palette
 
-``` python
+```python
 import matplotlib.pyplot as plt
 from pypalettes import create_cmap
 import numpy as np
@@ -110,10 +107,9 @@ plt.scatter(x, y, c=y, cmap=cmap)
 plt.colorbar()
 ```
 
-![](README_files/figure-commonmark/cell-4-output-1.png)
+![](images/cell-4-output-1.png)
 
-[Going
-further](https://python-graph-gallery.com/introduction-to-pypalettes/)
+[Going further](https://python-graph-gallery.com/introduction-to-pypalettes/)
 
 <br><br>
 
@@ -130,11 +126,11 @@ guide](https://python-graph-gallery.com/introduction-to-pypalettes/).
 
 ## Chart made with `pypalettes`
 
-*Click on the image to get the associated code!*
+_Click on the image to get the associated code!_
 
 <p>
 
-<a href='https://python-graph-gallery.com/web-map-with-custom-legend/'  target="_blank">
+<a href="https://python-graph-gallery.com/web-map-with-custom-legend/"  target="_blank">
 <img
          src="https://raw.githubusercontent.com/holtzy/The-Python-Graph-Gallery/master/static/graph/web-map-with-custom-legend.png"
          width="30%"
@@ -174,11 +170,8 @@ guide](https://python-graph-gallery.com/introduction-to-pypalettes/).
 from
 
 - the R package [paletteer](https://github.com/EmilHvitfeldt/paletteer)
-- the python library
-  [palettable](https://github.com/jiffyclub/palettable)
+- the python library [palettable](https://github.com/jiffyclub/palettable)
 
-A big thanks to [Yan Holtz](https://www.yan-holtz.com/) for creating the
-Color Palette Finder, a [web app for browsing
-palettes](https://python-graph-gallery.com/color-palette-finder/)
+A big thanks to [Yan Holtz](https://www.yan-holtz.com/) for creating the Color Palette Finder, a [web app for browsing palettes](https://python-graph-gallery.com/color-palette-finder/)
 
 <br><br>
