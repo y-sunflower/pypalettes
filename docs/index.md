@@ -4,7 +4,7 @@
 
 A large (**+2500**) collection of color maps for Python.
 
-![PyPI - Downloads](https://img.shields.io/pypi/dm/pypalettes)
+[![](https://static.pepy.tech/badge/pypalettes)](https://pepy.tech/projects/pypalettes)
 
 <br>
 
