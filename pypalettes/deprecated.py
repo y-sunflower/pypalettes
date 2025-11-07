@@ -28,8 +28,8 @@ def get_source(name: Union[str, List[str]] = "random"):
         func=get_source, name=name, attribute="source"
     )
     warnings.warn(warning_message, category=DeprecationWarning)
-    _, source, _, _ = _get_palette(name)
-    return source
+    palette: dict = _get_palette(name)
+    return palette["source"]
 
 
 def get_kind(name: Union[str, List[str]] = "random"):
@@ -42,8 +42,8 @@ def get_kind(name: Union[str, List[str]] = "random"):
     """
     warning_message = make_warning_message(func=get_kind, name=name, attribute="kind")
     warnings.warn(warning_message, category=DeprecationWarning)
-    _, _, kind, _ = _get_palette(name)
-    return kind
+    palette: dict = _get_palette(name)
+    return palette["kind"]
 
 
 def get_hex(
@@ -70,8 +70,8 @@ def get_hex(
     if raise_warn:
         warning_message = make_warning_message(func=get_hex, name=name, attribute="hex")
         warnings.warn(warning_message, category=DeprecationWarning)
-    hex_list, _, _, _ = _get_palette(name, reverse, keep_first_n, keep_last_n, keep)
-    return hex_list
+    palette = _get_palette(name, reverse, keep_first_n, keep_last_n, keep)
+    return palette["hex_list"]
 
 
 def get_rgb(

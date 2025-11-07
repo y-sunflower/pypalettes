@@ -32,11 +32,15 @@ def load_cmap(
             the output. Used to access larger palettes that are repeated.
         shuffle: Used to mix the order of colors. If an integer is
             supplied, it will be used as the seed.
+
+    Returns:
+        A matplotlib colormap.
     """
 
-    hex_list, source, kind, _ = _get_palette(
-        name, reverse, keep_first_n, keep_last_n, keep, repeat
-    )
+    palette: dict = _get_palette(name, reverse, keep_first_n, keep_last_n, keep, repeat)
+    hex_list: list = palette["hex_list"]
+    source: str = palette["source"]
+    kind: str = palette["kind"]
 
     if shuffle:
         if isinstance(shuffle, int):
@@ -44,9 +48,11 @@ def load_cmap(
         random.shuffle(hex_list)
 
     if cmap_type == "continuous":
-        cmap = LinearSegmentedColormap.from_list(name=f"{name}", colors=hex_list)
+        cmap: LinearSegmentedColormap = LinearSegmentedColormap.from_list(
+            name=f"{name}", colors=hex_list
+        )
     elif cmap_type == "discrete":
-        cmap = ListedColormap(name=f"{name}", colors=hex_list)
+        cmap: ListedColormap = ListedColormap(name=f"{name}", colors=hex_list)
     else:
         raise ValueError("cmap_type argument must be 'continuous' or 'discrete'")
 
