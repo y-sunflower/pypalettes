@@ -10,4 +10,4 @@ sandbox.*
 uv.lock
 .venv/
 *cache*
-scripts/
+*.sh
