@@ -22,6 +22,9 @@ jobs:
         with:
           enable-cache: true
 
+      - name: Run tests without dependencies
+        run: uv run pytest tests/test_load_palette.py
+
       - name: Install the project
         run: uv sync --all-groups
 

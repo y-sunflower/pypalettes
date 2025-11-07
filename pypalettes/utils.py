@@ -2,7 +2,7 @@ from importlib import resources
 import csv
 import random
 from difflib import get_close_matches
-from typing import Union, List, Optional
+from typing import Union, Optional
 import warnings
 
 
@@ -26,11 +26,11 @@ def _load_palettes():
 
 
 def _get_one_palette(
-    name: Union[str, List[str]],
+    name: Union[str, list[str]],
     reverse: bool = False,
     keep_first_n: Optional[int] = None,
     keep_last_n: Optional[int] = None,
-    keep: Optional[List[bool]] = None,
+    keep: Optional[list[bool]] = None,
 ) -> dict:
     """
     Get one palette from name.
@@ -104,11 +104,11 @@ def _get_one_palette(
 
 
 def _get_palette(
-    name: Union[str, List[str]],
+    name: Union[str, list[str]],
     reverse: bool = False,
     keep_first_n: Optional[int] = None,
     keep_last_n: Optional[int] = None,
-    keep: Optional[List[bool]] = None,
+    keep: Optional[list[bool]] = None,
     repeat: int = 1,
 ) -> dict:
     """

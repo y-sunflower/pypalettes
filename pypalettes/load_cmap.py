@@ -4,7 +4,7 @@ from PIL import ImageColor
 import random
 import colorsys
 
-from .utils import _get_palette
+from pypalettes.utils import _get_palette
 
 
 def load_cmap(
@@ -20,7 +20,7 @@ def load_cmap(
     """
     Load a matplotlib colormap from one of the 2500+ available palettes.
 
-    You can find all valid palette names [here](https://python-graph-gallery.com/color-palette-finder/){target="\_blank"}
+    You can find all valid palette names [here](https://python-graph-gallery.com/color-palette-finder/){target="_blank"}
 
     Args:
         name: Name of the palette
