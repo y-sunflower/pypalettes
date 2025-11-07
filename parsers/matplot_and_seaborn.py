@@ -25,7 +25,7 @@ def get_matplotlib_and_seaborn_palettes():
     # get matplotlib palettes
     def cmap_to_hex(cmap_name):
         cmap = mpl.colormaps[cmap_name]
-        hex_values = [mpl.colors.rgb2hex(cmap(i)) for i in range(cmap.N)]
+        hex_values = [mcolors.rgb2hex(cmap(i)) for i in range(cmap.N)]
         return hex_values
     all_cmap_names = list(colormaps)
     matplotlib_palettes = pd.DataFrame({

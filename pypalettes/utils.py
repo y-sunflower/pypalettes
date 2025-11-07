@@ -58,7 +58,7 @@ def _get_one_palette(
         if name not in palettes:
             suggestions = get_close_matches(name, palettes.keys(), n=5, cutoff=0.01)
             raise ValueError(
-                f"Palette with name '{name}' not found. Did you mean:\n{', '.join(suggestions)}?\n\n"
+                f"Palette with name '{name}' not found. Did you mean:\n{', '.join(suggestions)}?\n\n"  # ty: ignore
                 "See available palettes at https://python-graph-gallery.com/color-palette-finder/"
             )
         palette = palettes[name]

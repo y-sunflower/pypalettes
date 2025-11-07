@@ -39,7 +39,7 @@ from pypalettes.utils import _load_palettes, _get_one_palette, _get_palette
     ],
 )
 def test_load_palettes(palette_name, expected_palette):
-    global _PALETTES_CACHE
+    global _PALETTES_CACHE # ty: ignore
     _PALETTES_CACHE = None
 
     palettes = pd.DataFrame(_load_palettes()).to_dict()
@@ -62,19 +62,19 @@ def test_get_one_palette_errors():
 
 def test_get_palette_errors():
     with pytest.raises(TypeError, match="reverse must be a boolean."):
-        _get_palette("Acadia", reverse="invalid type")
+        _get_palette("Acadia", reverse="invalid type") # ty: ignore
 
     with pytest.raises(TypeError, match=r"^keep_first_n must be a positive integer, not "):
-        _get_palette("Acadia", keep_first_n="invalid type")
+        _get_palette("Acadia", keep_first_n="invalid type") # ty: ignore
 
     with pytest.raises(TypeError, match=r"^keep_last_n must be a positive integer, not "):
-        _get_palette("Acadia", keep_last_n="invalid type")
+        _get_palette("Acadia", keep_last_n="invalid type") # ty: ignore
 
     with pytest.raises(TypeError, match=r"^keep must be a list of boolean values, not"):
-        _get_palette("Acadia", keep="invalid type")
+        _get_palette("Acadia", keep="invalid type") # ty: ignore
 
     with pytest.raises(TypeError, match=r"`name` must be a string or a list of strings"):
-        _get_palette(17)
+        _get_palette(17) # ty: ignore
 
     with pytest.raises(ValueError, match="Cannot specify more than one of keep_first_n, keep_last_n, and keep arguments simultaneously."):
         _get_palette("Acadia", keep_first_n=3, keep_last_n=2)

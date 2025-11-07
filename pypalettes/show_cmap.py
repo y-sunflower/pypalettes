@@ -1,5 +1,5 @@
 import matplotlib.pyplot as plt
-import matplotlib as mpl
+from matplotlib.figure import Figure
 from .load_cmap import load_cmap
 
 from typing import Any
@@ -10,7 +10,7 @@ def show_cmap(
     max_cols: int = 8,
     spacing: float = 0.1,
     square_size: float = 1,
-) -> mpl.figure.Figure:
+) -> Figure:
     """
     Show the colors from a colormap as a grid of colored squares.
 

@@ -50,12 +50,16 @@ def load_cmap(
     else:
         raise ValueError("cmap_type argument must be 'continuous' or 'discrete'")
 
-    cmap.source = source
-    cmap.kind = kind
-    cmap.hex = hex_list
-    cmap.colors = hex_list
-    cmap.rgb = [ImageColor.getcolor(hex, "RGB") for hex in hex_list]
-    cmap.yiq = [colorsys.rgb_to_yiq(rgb[0], rgb[1], rgb[2]) for rgb in cmap.rgb]
-    cmap.hsv = [colorsys.rgb_to_hsv(rgb[0], rgb[1], rgb[2]) for rgb in cmap.rgb]
+    cmap.source = source  # ty: ignore
+    cmap.kind = kind  # ty: ignore
+    cmap.hex = hex_list  # ty: ignore
+    cmap.colors = hex_list  # ty: ignore
+    cmap.rgb = [ImageColor.getcolor(hex, "RGB") for hex in hex_list]  # ty: ignore
+    cmap.yiq = [
+        colorsys.rgb_to_yiq(rgb[0], rgb[1], rgb[2]) for rgb in cmap.rgb
+    ]  # ty: ignore
+    cmap.hsv = [
+        colorsys.rgb_to_hsv(rgb[0], rgb[1], rgb[2]) for rgb in cmap.rgb
+    ]  # ty: ignore
 
     return cmap
