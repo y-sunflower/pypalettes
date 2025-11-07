@@ -19,7 +19,7 @@ jobs:
           python-version: "3.13"
 
       - name: Install Ruff
-        run: pip install ruff==0.9.10
+        run: pip install ruff==0.11.13
 
       - name: Run Ruff format check
         run: ruff format --check .

@@ -55,11 +55,13 @@ def load_cmap(
     cmap.hex = hex_list  # ty: ignore
     cmap.colors = hex_list  # ty: ignore
     cmap.rgb = [ImageColor.getcolor(hex, "RGB") for hex in hex_list]  # ty: ignore
-    cmap.yiq = [
-        colorsys.rgb_to_yiq(rgb[0], rgb[1], rgb[2]) for rgb in cmap.rgb
-    ]  # ty: ignore
-    cmap.hsv = [
-        colorsys.rgb_to_hsv(rgb[0], rgb[1], rgb[2]) for rgb in cmap.rgb
-    ]  # ty: ignore
+    cmap.yiq = [  # ty: ignore
+        colorsys.rgb_to_yiq(rgb[0], rgb[1], rgb[2])
+        for rgb in cmap.rgb  # ty: ignore
+    ]
+    cmap.hsv = [  # ty: ignore
+        colorsys.rgb_to_hsv(rgb[0], rgb[1], rgb[2])
+        for rgb in cmap.rgb  # ty: ignore
+    ]
 
     return cmap
