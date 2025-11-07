@@ -24,6 +24,7 @@ jobs:
 
       - name: Run tests without dependencies
         run: |
+          uv venv
           uv pip install pytest
           uv run --no-sync pytest tests/test_load_palette.py
 
