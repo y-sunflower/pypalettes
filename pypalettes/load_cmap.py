@@ -1,5 +1,4 @@
 from typing import Union, Optional, TYPE_CHECKING
-from PIL import ImageColor
 import random
 import colorsys
 
@@ -39,6 +38,7 @@ def load_cmap(
         A matplotlib colormap.
     """
     from matplotlib.colors import LinearSegmentedColormap, ListedColormap
+    from PIL import ImageColor
 
     palette: dict = _get_palette(name, reverse, keep_first_n, keep_last_n, keep, repeat)
     hex_list: list = palette["hex_list"]

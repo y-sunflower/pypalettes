@@ -1,8 +1,7 @@
 from typing import Union, List, Optional
-from PIL import ImageColor
 import warnings
 
-from .utils import _get_palette
+from pypalettes.utils import _get_palette
 
 warnings.simplefilter("always")
 
@@ -97,6 +96,8 @@ def get_rgb(
     - keep
         Specify which colors to keep in the palette
     """
+    from PIL import ImageColor
+
     warning_message: str = make_warning_message(
         func=get_rgb, name=name, attribute="rgb"
     )

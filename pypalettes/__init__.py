@@ -4,8 +4,10 @@ from .create_cmap import create_cmap
 from .show_cmap import show_cmap
 from .deprecated import get_source, get_hex, get_rgb, get_kind, add_cmap
 
-__version__ = "0.1.6"
-__all__ = [
+from typing import Literal
+
+__version__: Literal["0.1.6"] = "0.1.6"
+__all__: list[str] = [
     "load_cmap",
     "load_palette",
     "add_cmap",

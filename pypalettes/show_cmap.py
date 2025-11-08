@@ -1,6 +1,5 @@
-from .load_cmap import load_cmap
-
 from typing import Any, TYPE_CHECKING
+from pypalettes.load_cmap import load_cmap
 
 if TYPE_CHECKING:
     from matplotlib.figure import Figure
