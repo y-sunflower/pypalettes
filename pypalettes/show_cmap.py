@@ -1,8 +1,9 @@
-import matplotlib.pyplot as plt
-from matplotlib.figure import Figure
 from .load_cmap import load_cmap
 
-from typing import Any
+from typing import Any, TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from matplotlib.figure import Figure
 
 
 def show_cmap(
@@ -10,7 +11,7 @@ def show_cmap(
     max_cols: int = 8,
     spacing: float = 0.1,
     square_size: float = 1,
-) -> Figure:
+) -> "Figure":
     """
     Show the colors from a colormap as a grid of colored squares.
 
@@ -27,24 +28,33 @@ def show_cmap(
     Returns:
         matplotlib.figure.Figure: The figure object containing the colormap visualization.
     """
-    cmap = load_cmap(*args)
-    colors = cmap.colors
-    num_colors = len(colors)
-    num_rows = (num_colors + max_cols - 1) // max_cols
+    import matplotlib.pyplot as plt
+    from matplotlib.colors import LinearSegmentedColormap, ListedColormap
+    from matplotlib.patches import Rectangle
+    from matplotlib.figure import Figure
+    from matplotlib.axes import Axes
 
-    fig_height = max(num_rows * (square_size + spacing), 2)
-    fig_width = max_cols * (square_size + spacing)
+    cmap: LinearSegmentedColormap | ListedColormap = load_cmap(*args)
+    colors: list = cmap.colors  # ty: ignore
+    num_colors: int = len(colors)
+    num_rows: int = (num_colors + max_cols - 1) // max_cols
+
+    fig_height: int | float = max(num_rows * (square_size + spacing), 2)
+    fig_width: int | float = max_cols * (square_size + spacing)
+
+    fig: Figure
+    ax: Axes
     fig, ax = plt.subplots(figsize=(fig_width, fig_height), dpi=150)
     ax.axis("off")
 
     for idx, color in enumerate(colors):
-        row = idx // max_cols
-        col = idx % max_cols
+        row: int = idx // max_cols
+        col: int = idx % max_cols
 
-        x = col * (square_size + spacing)
-        y = -row * (square_size + spacing)
+        x: int | float = col * (square_size + spacing)
+        y: int | float = -row * (square_size + spacing)
 
-        rect = plt.Rectangle(
+        rect: Rectangle = plt.Rectangle(
             (x, y), square_size, square_size, color=color, clip_on=False
         )
         ax.add_patch(rect)

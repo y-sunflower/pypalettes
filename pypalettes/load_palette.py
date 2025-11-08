@@ -1,15 +1,15 @@
-from typing import Union, List, Optional
+from typing import Union, Optional
 import random
 
 from pypalettes.utils import _get_palette
 
 
 def load_palette(
-    name: Union[str, List[str]] = "random",
+    name: Union[str, list[str]] = "random",
     reverse: bool = False,
     keep_first_n: Optional[int] = None,
     keep_last_n: Optional[int] = None,
-    keep: Optional[List[bool]] = None,
+    keep: Optional[list[bool]] = None,
     repeat: int = 1,
     shuffle: Union[bool, int] = False,
 ) -> list[str]:

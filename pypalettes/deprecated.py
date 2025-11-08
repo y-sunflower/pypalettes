@@ -1,22 +1,21 @@
 from typing import Union, List, Optional
 from PIL import ImageColor
 import warnings
-from matplotlib.colors import LinearSegmentedColormap, ListedColormap
 
 from .utils import _get_palette
 
 warnings.simplefilter("always")
 
 
-def make_warning_message(func, name, attribute):
-    message = f"""
+def make_warning_message(func, name, attribute) -> str:
+    message: str = f"""
 The {func.__name__}() function is deprecated and will be removed in a future version.
 Please, use: load_cmap('{name}').{attribute}
 """
     return message
 
 
-def get_source(name: Union[str, List[str]] = "random"):
+def get_source(name: Union[str, List[str]] = "random") -> str:
     """
     Deprecated. Get source of the palette.
 
@@ -24,7 +23,7 @@ def get_source(name: Union[str, List[str]] = "random"):
     - name
         Name of the palette
     """
-    warning_message = make_warning_message(
+    warning_message: str = make_warning_message(
         func=get_source, name=name, attribute="source"
     )
     warnings.warn(warning_message, category=DeprecationWarning)
@@ -40,7 +39,9 @@ def get_kind(name: Union[str, List[str]] = "random"):
     - name
         Name of the palette
     """
-    warning_message = make_warning_message(func=get_kind, name=name, attribute="kind")
+    warning_message: str = make_warning_message(
+        func=get_kind, name=name, attribute="kind"
+    )
     warnings.warn(warning_message, category=DeprecationWarning)
     palette: dict = _get_palette(name)
     return palette["kind"]
@@ -53,7 +54,7 @@ def get_hex(
     keep_last_n: Optional[int] = None,
     keep: Optional[List[bool]] = None,
     raise_warn: bool = True,
-):
+) -> list:
     """
     Deprecated. Get hex colors from name.
 
@@ -68,9 +69,11 @@ def get_hex(
         Specify which colors to keep in the palette
     """
     if raise_warn:
-        warning_message = make_warning_message(func=get_hex, name=name, attribute="hex")
+        warning_message: str = make_warning_message(
+            func=get_hex, name=name, attribute="hex"
+        )
         warnings.warn(warning_message, category=DeprecationWarning)
-    palette = _get_palette(name, reverse, keep_first_n, keep_last_n, keep)
+    palette: dict = _get_palette(name, reverse, keep_first_n, keep_last_n, keep)
     return palette["hex_list"]
 
 
@@ -80,7 +83,7 @@ def get_rgb(
     keep_first_n: Optional[int] = None,
     keep_last_n: Optional[int] = None,
     keep: Optional[List[bool]] = None,
-):
+) -> list:
     """
     Deprecated. Get rgb colors from name.
 
@@ -94,16 +97,18 @@ def get_rgb(
     - keep
         Specify which colors to keep in the palette
     """
-    warning_message = make_warning_message(func=get_rgb, name=name, attribute="rgb")
+    warning_message: str = make_warning_message(
+        func=get_rgb, name=name, attribute="rgb"
+    )
     warnings.warn(warning_message, category=DeprecationWarning)
-    hex_list = get_hex(name, reverse, keep_first_n, keep_last_n, keep, raise_warn=False)
-    rgb_list = [ImageColor.getcolor(hex, "RGB") for hex in hex_list]
+    hex_list: list = get_hex(
+        name, reverse, keep_first_n, keep_last_n, keep, raise_warn=False
+    )
+    rgb_list: list = [ImageColor.getcolor(hex, "RGB") for hex in hex_list]
     return rgb_list
 
 
-def add_cmap(
-    colors: List, name: str, cmap_type: str = "discrete"
-) -> Union[LinearSegmentedColormap, ListedColormap]:
+def add_cmap(colors: List, name: str, cmap_type: str = "discrete") -> None:
     """
     Deprecated function, used `create_cmap()` instead
     """

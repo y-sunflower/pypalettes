@@ -1,22 +1,24 @@
-from matplotlib.colors import LinearSegmentedColormap, ListedColormap
-from typing import Union, List, Optional
+from typing import Union, Optional, TYPE_CHECKING
 from PIL import ImageColor
 import random
 import colorsys
+
+if TYPE_CHECKING:
+    from matplotlib.colors import LinearSegmentedColormap, ListedColormap
 
 from pypalettes.utils import _get_palette
 
 
 def load_cmap(
-    name: Union[str, List[str]] = "random",
+    name: Union[str, list[str]] = "random",
     cmap_type: str = "discrete",
     reverse: bool = False,
     keep_first_n: Optional[int] = None,
     keep_last_n: Optional[int] = None,
-    keep: Optional[List[bool]] = None,
+    keep: Optional[list[bool]] = None,
     repeat: int = 1,
     shuffle: Union[bool, int] = False,
-):
+) -> Union["LinearSegmentedColormap", "ListedColormap"]:
     """
     Load a matplotlib colormap from one of the 2500+ available palettes.
 
@@ -36,6 +38,7 @@ def load_cmap(
     Returns:
         A matplotlib colormap.
     """
+    from matplotlib.colors import LinearSegmentedColormap, ListedColormap
 
     palette: dict = _get_palette(name, reverse, keep_first_n, keep_last_n, keep, repeat)
     hex_list: list = palette["hex_list"]
@@ -56,16 +59,16 @@ def load_cmap(
     else:
         raise ValueError("cmap_type argument must be 'continuous' or 'discrete'")
 
-    cmap.source = source  # ty: ignore
-    cmap.kind = kind  # ty: ignore
-    cmap.hex = hex_list  # ty: ignore
-    cmap.colors = hex_list  # ty: ignore
-    cmap.rgb = [ImageColor.getcolor(hex, "RGB") for hex in hex_list]  # ty: ignore
-    cmap.yiq = [  # ty: ignore
+    cmap.source: str = source  # ty: ignore
+    cmap.kind: str = kind  # ty: ignore
+    cmap.hex: list = hex_list  # ty: ignore
+    cmap.colors: list = hex_list  # ty: ignore
+    cmap.rgb: list = [ImageColor.getcolor(hex, "RGB") for hex in hex_list]  # ty: ignore
+    cmap.yiq: list = [  # ty: ignore
         colorsys.rgb_to_yiq(rgb[0], rgb[1], rgb[2])
         for rgb in cmap.rgb  # ty: ignore
     ]
-    cmap.hsv = [  # ty: ignore
+    cmap.hsv: list = [  # ty: ignore
         colorsys.rgb_to_hsv(rgb[0], rgb[1], rgb[2])
         for rgb in cmap.rgb  # ty: ignore
     ]

@@ -1,12 +1,14 @@
-from matplotlib.colors import LinearSegmentedColormap, ListedColormap
-from typing import List, Union
+from typing import Union, TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from matplotlib.colors import LinearSegmentedColormap, ListedColormap
 
 
 def create_cmap(
-    colors: List,
+    colors: list,
     cmap_type: str = "discrete",
     name: str = "custom_cmap",
-) -> Union[LinearSegmentedColormap, ListedColormap]:
+) -> Union["LinearSegmentedColormap", "ListedColormap"]:
     """
     Create a matplotlib colormap from an iterable of colors.
 
@@ -16,10 +18,14 @@ def create_cmap(
         name: A name for the palette
         cmap_type: Type of colormap: 'continuous' or 'discrete'
     """
+    from matplotlib.colors import LinearSegmentedColormap, ListedColormap
+
     if cmap_type == "discrete":
-        cmap = ListedColormap(colors=colors, name=name)
+        cmap: ListedColormap = ListedColormap(colors=colors, name=name)
     elif cmap_type == "continuous":
-        cmap = LinearSegmentedColormap.from_list(name=name, colors=colors)
+        cmap: LinearSegmentedColormap = LinearSegmentedColormap.from_list(
+            name=name, colors=colors
+        )
     else:
         raise ValueError("cmap_type argument must be 'continuous' or 'discrete'")
 
