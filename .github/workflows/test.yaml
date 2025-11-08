@@ -28,7 +28,7 @@ jobs:
           uv pip install pytest
           uv run --no-sync pytest tests/test_load_palette.py
 
-      - name: Install the project
+      - name: Install dependencies
         run: uv sync --all-groups
 
       - name: Run tests

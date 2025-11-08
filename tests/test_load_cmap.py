@@ -156,7 +156,7 @@ class TestLoadCmap:
 
     def test_load_cmap_invalid_repeat(self):
         with pytest.raises(TypeError):
-            load_cmap(name="ClaudeMonet", repeat=1.5) # ty: ignore
+            load_cmap(name="ClaudeMonet", repeat=1.5)  # ty: ignore
 
     def test_load_cmap_invalid_name(self):
         with pytest.raises(ValueError):

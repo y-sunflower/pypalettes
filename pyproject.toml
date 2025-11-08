@@ -3,15 +3,12 @@ name = "pypalettes"
 version = "0.1.6"
 description = "A large (+2500) collection of color maps for Python"
 license-files = ["LICENSE.note"]
-keywords = ["palette", "colormap", "cmap", "matplotlib", "dataviz", "visualization", "seaborn"]
+keywords = ["palette", "colormap", "cmap", "matplotlib", "dataviz", "visualization", "seaborn", "plotly"]
 authors = [
   { name="Joseph Barbier", email="joseph.barbierdarnal@gmail.com" },
 ]
 readme = "README.md"
 requires-python = ">=3.10"
-dependencies = [
-    "matplotlib>=3.10.0",
-]
 classifiers = [
     "Programming Language :: Python :: 3",
     "License :: OSI Approved :: MIT License",
@@ -25,6 +22,11 @@ requires = [
     "setuptools-scm",
 ]
 build-backend = "setuptools.build_meta"
+
+[project.optional-dependencies]
+matplotlib = [
+    "matplotlib>=3.10.0",
+]
 
 [dependency-groups]
 dev = [
@@ -49,8 +51,9 @@ Issues = "https://github.com/JosephBARBIERDARNAL/pypalettes/issues"
 Documentation = "https://python-graph-gallery.com/introduction-to-pypalettes/"
 Repository = "https://github.com/JosephBARBIERDARNAL/pypalettes"
 
+
 [tool.ruff]
-extend-exclude = ["tests", "parsers"]
+extend-exclude = ["parsers"]
 
 [tool.setuptools]
 packages = ["pypalettes"]
