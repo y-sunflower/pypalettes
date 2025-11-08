@@ -1,17 +1,14 @@
 [project]
 name = "pypalettes"
 version = "0.1.6"
-description = "A large (+2500) collection of color maps for Python"
+description = "A dependency-free large (+2500) collection of colormaps and palettes for Python."
 license-files = ["LICENSE.note"]
-keywords = ["palette", "colormap", "cmap", "matplotlib", "dataviz", "visualization", "seaborn"]
+keywords = ["palette", "colormap", "cmap", "matplotlib", "dataviz", "visualization", "seaborn", "plotly", "bokeh", "altair"]
 authors = [
   { name="Joseph Barbier", email="joseph.barbierdarnal@gmail.com" },
 ]
 readme = "README.md"
 requires-python = ">=3.10"
-dependencies = [
-    "matplotlib>=3.10.0",
-]
 classifiers = [
     "Programming Language :: Python :: 3",
     "License :: OSI Approved :: MIT License",
@@ -25,13 +22,6 @@ requires = [
     "setuptools-scm",
 ]
 build-backend = "setuptools.build_meta"
-
-[tool.setuptools]
-packages = ["pypalettes"]
-include-package-data = true
-
-[tool.uv.sources]
-pypalettes = { workspace = true }
 
 [dependency-groups]
 dev = [
@@ -47,18 +37,24 @@ dev = [
     "genbadge[coverage]>=1.1.2",
     "seaborn>=0.13.2",
     "plotnine>=0.14.6",
-]
-quarto = [
-    "jupyter>=1.1.1",
-    "nbclient>=0.10.2",
-    "nbformat>=5.10.4",
+    "ty>=0.0.1a25",
 ]
 
 [project.urls]
 Homepage = "https://python-graph-gallery.com/color-palette-finder/"
-Issues = "https://github.com/JosephBARBIERDARNAL/pypalettes/issues"
+Issues = "https://github.com/y-sunflower/pypalettes/issues"
 Documentation = "https://python-graph-gallery.com/introduction-to-pypalettes/"
-Repository = "https://github.com/JosephBARBIERDARNAL/pypalettes"
+Repository = "https://github.com/y-sunflower/pypalettes"
 
 [tool.ruff]
-extend-exclude = ["tests", "parsers"]
+extend-exclude = ["parsers"]
+
+[tool.setuptools]
+packages = ["pypalettes"]
+include-package-data = true
+
+[tool.uv.sources]
+pypalettes = { workspace = true }
+
+[tool.ty.src]
+exclude = ["tests"]

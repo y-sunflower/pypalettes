@@ -1,4 +1,3 @@
-
 <br>
 
 This directory contains scripts that at the end generate `palettes.csv` (and `palettes.json`).
@@ -11,10 +10,11 @@ This directory contains scripts that at the end generate `palettes.csv` (and `pa
 ## Palette source
 
 - Sources
-   - https://pmassicotte.github.io/paletteer_gallery/
-   - and color maps already availables in `matplotlib` and `seaborn`
+  - https://pmassicotte.github.io/paletteer_gallery/
+  - and color maps already availables in `matplotlib` and `seaborn`
 
-Data is then saved into a `.csv` (and `.json`) format with name + palette + source + kind, where:
+Data is then saved into a `.csv` format with name + palette + source + kind, where:
+
 - `name`: palette name (such as viridis or inferno)
 - `palette`: list of string (hexadecimal format)
 - `source`: a simple string that says where the palette comes from
@@ -24,7 +24,7 @@ Data is then saved into a `.csv` (and `.json`) format with name + palette + sour
 
 ## Dupplicates
 
-*Warning: Since some color maps have the **same name**, some specific palettes can be different from the ones expected. If you find a mistake, please **open an issue**.*
+_Warning: Since some color maps have the **same name**, some specific palettes can be different from the ones expected. If you find a mistake, please **open an issue**._
 
 <br><br>
 

@@ -1,5 +1,5 @@
 import pandas as pd
-from list_manual_palettes import palettes
+from parsers.list_manual_palettes import palettes
 
 def get_manual_palettes(palettes=palettes):
    df = pd.DataFrame()

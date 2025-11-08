@@ -1,5 +1,5 @@
 :root {
-  --primary-color: #531d1d;
+  --primary-color: #8d2f2fff;
 }
 
 h2,
@@ -19,6 +19,47 @@ h4 {
 @media (max-width: 768px) {
   .md-nav--primary .md-nav__title[for="__drawer"] {
     background-color: var(--primary-color);
+  }
+
+  .hero {
+    height: 80vh !important;
+    font-size: 1em !important;
+  }
+}
+
+.pypalettes {
+  margin-bottom: 0.5em !important;
+  font-size: 3.5em !important;
+  font-weight: 700 !important;
+  margin: 0;
+  background: linear-gradient(
+    90deg,
+    #ff0080,
+    #ff8c00,
+    #ffd700,
+    #00ff7f,
+    #00bfff,
+    #9400ff,
+    #ff1493,
+    #ff0080
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradient-shift 4s ease infinite;
+  letter-spacing: -0.02em;
+}
+
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% center;
+  }
+  50% {
+    background-position: 100% center;
+  }
+  100% {
+    background-position: 0% center;
   }
 }
 
@@ -49,7 +90,7 @@ footer.custom-footer {
   height: 2px;
   bottom: -5px;
   left: 0;
-  background-color: #eff1fa;
+  background-color: #f1f1f1;
   transition: width 0.3s ease;
 }
 
@@ -67,7 +108,7 @@ footer.custom-footer {
   display: inline-block;
   margin-top: 10px;
   padding: 10px 20px;
-  background-color: #eff1fa;
+  background-color: #f1f1f1;
   color: #1e1e2f;
   text-decoration: none;
   border-radius: 8px;
@@ -78,7 +119,7 @@ footer.custom-footer {
 }
 
 .footer-link:hover {
-  background-color: #eff1fa;
+  background-color: #f1f1f1;
   transform: translateY(-3px);
   box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
 }
@@ -99,8 +140,17 @@ footer.custom-footer {
   color: #ffffff;
 }
 
-.sponsor-name {
-  background-color: #eff1fa;
+.course-name {
+  background-color: #f1f1f1;
   color: #1e1e2f;
   padding: 2px;
+}
+
+.hero {
+  height: 40vh;
+  font-size: 1.4em;
+}
+
+.md-typeset img[align="right"] {
+  margin: auto !important;
 }

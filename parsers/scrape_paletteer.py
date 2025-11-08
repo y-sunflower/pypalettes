@@ -1,7 +1,7 @@
 import pandas as pd
 from bs4 import BeautifulSoup
 
-from utils import split_string
+from parsers.utils import split_string
 
 def get_paletteer_palettes():
 
@@ -29,7 +29,7 @@ def get_paletteer_palettes():
       # iterate over each sub_section found
       for sub_section in sub_sections:
          kind = sub_section['id']
-         
+
          # get the name and source of the palette
          name_tags = sub_section.find_all('center')
          for name_tag in name_tags:

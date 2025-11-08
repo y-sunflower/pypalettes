@@ -2,13 +2,11 @@ from importlib import resources
 import csv
 import random
 from difflib import get_close_matches
-from typing import Union, List, Optional
+from typing import Union, Optional
 import warnings
 
-_PALETTES_CACHE = None
 
-
-def _load_palettes(palettes_path: str = "palettes.csv"):
+def _load_palettes():
     """
     Load palettes from csv file.
 
@@ -16,26 +14,24 @@ def _load_palettes(palettes_path: str = "palettes.csv"):
     - palettes_path
         Path to the csv file with the palettes
     """
-    global _PALETTES_CACHE
 
-    if _PALETTES_CACHE is None:
-        _PALETTES_CACHE = {}
-        palettes_file = resources.files("pypalettes").joinpath(palettes_path)
-        with palettes_file.open("r") as f:
-            reader = csv.DictReader(f)
-            for row in reader:
-                _PALETTES_CACHE[row["name"]] = row
+    palettes_dict: dict = {}
+    palettes_file = resources.files("pypalettes").joinpath("palettes.csv")
+    with palettes_file.open("r") as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            palettes_dict[row["name"]] = row
 
-    return _PALETTES_CACHE
+    return palettes_dict
 
 
 def _get_one_palette(
-    name: Union[str, List[str]],
+    name: Union[str, list[str]],
     reverse: bool = False,
     keep_first_n: Optional[int] = None,
     keep_last_n: Optional[int] = None,
-    keep: Optional[List[bool]] = None,
-):
+    keep: Optional[list[bool]] = None,
+) -> dict:
     """
     Get one palette from name.
 
@@ -52,13 +48,16 @@ def _get_one_palette(
         Specify which colors to keep in the palette
     """
     palettes = _load_palettes()
+    palette_dict: dict = dict()
     if name == "random":
         palette = random.choice(list(palettes.values()))
     else:
         if name not in palettes:
-            suggestions = get_close_matches(name, palettes.keys(), n=5, cutoff=0.01)
+            suggestions: list = get_close_matches(
+                name, palettes.keys(), n=5, cutoff=0.01
+            )
             raise ValueError(
-                f"Palette with name '{name}' not found. Did you mean:\n{', '.join(suggestions)}?\n\n"
+                f"Palette with name '{name}' not found. Did you mean:\n{', '.join(suggestions)}?\n\n"  # ty: ignore
                 "See available palettes at https://python-graph-gallery.com/color-palette-finder/"
             )
         palette = palettes[name]
@@ -84,26 +83,34 @@ def _get_one_palette(
         )
 
     if reverse:
-        hex_list = hex_list[::-1]
+        hex_list: list = hex_list[::-1]
 
     if keep_first_n:
-        hex_list = hex_list[:keep_first_n]
+        hex_list: list = hex_list[:keep_first_n]
     elif keep_last_n:
-        hex_list = hex_list[-keep_last_n:]
+        hex_list: list = hex_list[-keep_last_n:]
     elif keep is not None:
-        hex_list = [color for color, keep_color in zip(hex_list, keep) if keep_color]
+        hex_list: list = [
+            color for color, keep_color in zip(hex_list, keep) if keep_color
+        ]
 
-    return hex_list, source, kind, paletteer_kind
+    palette_dict["palette"] = palette
+    palette_dict["hex_list"] = hex_list
+    palette_dict["source"] = source
+    palette_dict["kind"] = kind
+    palette_dict["paletteer_kind"] = paletteer_kind
+
+    return palette_dict
 
 
 def _get_palette(
-    name: Union[str, List[str]],
+    name: Union[str, list[str]],
     reverse: bool = False,
     keep_first_n: Optional[int] = None,
     keep_last_n: Optional[int] = None,
-    keep: Optional[List[bool]] = None,
+    keep: Optional[list[bool]] = None,
     repeat: int = 1,
-):
+) -> dict:
     """
     Get palette from name.
 
@@ -126,7 +133,7 @@ def _get_palette(
     if keep_first_n is not None and (
         not isinstance(keep_first_n, int) or keep_first_n <= 0
     ):
-        raise TypeError(f"keep_first_n must be a positive integer, not {keep_first_n}.")
+        raise TypeError("keep_first_n must be a positive integer, not {keep_first_n}.")
     if keep_last_n is not None and (
         not isinstance(keep_last_n, int) or keep_last_n <= 0
     ):
@@ -137,13 +144,14 @@ def _get_palette(
         raise TypeError(f"keep must be a list of boolean values, not {keep}.")
     if sum(x is not None for x in [keep_first_n, keep_last_n, keep]) > 1:
         raise ValueError(
-            "Cannot specify more than one of keep_first_n, keep_last_n, and keep arguments simultaneously."
+            "Cannot specify more than one of keep_first_n, keep_last_n, "
+            "and keep arguments simultaneously."
         )
     if not repeat >= 1 or not isinstance(repeat, int):
         raise TypeError("repeat must be a positive integer.")
 
     if isinstance(name, str):
-        hex_list, source, kind, paletteer_kind = _get_one_palette(
+        palette_dict: dict = _get_one_palette(
             name=name,
             reverse=reverse,
             keep_first_n=keep_first_n,
@@ -154,22 +162,28 @@ def _get_palette(
         for param in [keep_first_n, keep_last_n, keep]:
             if param is not None:
                 warnings.warn(
-                    "`keep_first_n`, `keep_last_n` and `keep` arguments are ignored when `name` is a list."
+                    "`keep_first_n`, `keep_last_n` and `keep` arguments"
+                    " are ignored when `name` is a list."
                 )
-        hex_list = []
-        source = []
-        kind = []
-        paletteer_kind = []
+        hex_list: list = []
+        source: list = []
+        kind: list = []
+        paletteer_kind: list = []
         for palette_name in name:
-            one_hex_list, one_source, one_kind, one_paletteer_kind = _get_one_palette(
-                name=palette_name
-            )
-            hex_list.extend(one_hex_list)
-            source.append(one_source)
-            kind.append(one_kind)
-            paletteer_kind.append(one_paletteer_kind)
+            one_palette_dict: dict = _get_one_palette(name=palette_name)
+            hex_list.extend(one_palette_dict["hex_list"])
+            source.append(one_palette_dict["source"])
+            kind.append(one_palette_dict["kind"])
+            paletteer_kind.append(one_palette_dict["paletteer_kind"])
+
+        palette_dict: dict = {}
+        palette_dict["hex_list"] = hex_list
+        palette_dict["source"] = source
+        palette_dict["kind"] = kind
+        palette_dict["paletteer_kind"] = paletteer_kind
     else:
         raise TypeError("`name` must be a string or a list of strings")
 
-    hex_list *= repeat
-    return hex_list, source, kind, paletteer_kind
+    palette_dict["hex_list"] *= repeat
+
+    return palette_dict

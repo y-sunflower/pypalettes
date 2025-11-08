@@ -1,30 +1,35 @@
-name: Run Tests
+name: Unit tests
 
 on:
   pull_request:
-    branches:
-      - main
+    branches: [main]
 
 jobs:
   build:
-    name: continuous-integration
     runs-on: ubuntu-latest
     strategy:
       matrix:
         python-version:
           - "3.10"
-          - "3.13"
-
+          - "3.14"
+    env:
+      UV_PYTHON: ${{ matrix.python-version }}
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install uv and set the python version
+      - name: Install uv
         uses: astral-sh/setup-uv@v5
         with:
-          python-version: ${{ matrix.python-version }}
+          enable-cache: true
 
-      - name: Install the project
-        run: uv sync --all-extras --dev
+      - name: Run tests without dependencies
+        run: |
+          uv venv
+          uv pip install pytest
+          uv run --no-sync pytest tests/test_load_palette.py
+
+      - name: Install dependencies
+        run: uv sync --all-groups
 
       - name: Run tests
         run: uv run pytest
