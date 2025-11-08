@@ -2,9 +2,9 @@
 
 `pypalettes` offers 3 functions:
 
-- [`load_cmap()`](../reference/load_cmap){target="\_blank"}: the core function that loads a colormap from one of the 2500+ available palettes. All available palettes can be found in the [Color Palette Finder](https://python-graph-gallery.com/color-palette-finder/){target="\_blank"}.
-- [`create_cmap()`](../reference/create_cmap){target="\_blank"}: a function to create your own colormaps from a list of colors.
-- [`show_cmap()`](../reference/show_cmap){target="\_blank"}: a function to preview the colors of a given palette.
+- [`load_cmap()`](./reference/load_cmap.md){target="\_blank"}: the core function that loads a colormap from one of the 2500+ available palettes. All available palettes can be found in the [Color Palette Finder](https://python-graph-gallery.com/color-palette-finder/){target="\_blank"}.
+- [`create_cmap()`](./reference/create_cmap.md){target="\_blank"}: a function to create your own colormaps from a list of colors.
+- [`show_cmap()`](./reference/show_cmap.md){target="\_blank"}: a function to preview the colors of a given palette.
 
 Since those functions are built for matplotlib, they work with **any matplotlib-based plotting library** (seaborn, plotnine, (geo)pandas, cartopy, statsmodels, etc).
 

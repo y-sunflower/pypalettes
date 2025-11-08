@@ -1,28 +1,22 @@
+<div align="center">
+
 # PyPalettes
 
-<img src="https://github.com/JosephBARBIERDARNAL/pypalettes/blob/main/images/logo.png?raw=true" alt="pypalettes logo" align="right" width="160px"/>
+</div>
 
-A large (**+2500**) collection of color maps for Python.
+<img src="https://github.com/y-sunflower/pypalettes/blob/main/images/logo.png?raw=true" alt="pypalettes logo" align="right" width="160px"/>
 
-- All available palettes can be found in the [Color Palette
-  Finder](https://python-graph-gallery.com/color-palette-finder/).
-- To learn more about how to use `pypalettes`, please refer to the
-  [official
-  documentation](https://python-graph-gallery.com/introduction-to-pypalettes/).
+A _dependency-free_ large (**+2500**) collection of colormaps and palettes for Python.
+
+- All available palettes can be found in the [Color Palette Finder](https://python-graph-gallery.com/color-palette-finder/).
+- To learn more about how to use `pypalettes`, please refer to the [official documentation](https://python-graph-gallery.com/introduction-to-pypalettes/).
 
 [![](https://static.pepy.tech/badge/pypalettes)](https://pepy.tech/projects/pypalettes)
 ![Coverage badge](docs/coverage-badge.svg)
 
-<center align="left">
-
 ![](pypalettes.gif)
 
-</center>
-
-> This package is based on the R package
-> [paletteer](https://github.com/EmilHvitfeldt/paletteer), and all
-> associated sub-packages (with original palettes) mentioned in the
-> [LICENSE](LICENSE.note) file.
+> This package is based on the R package [paletteer](https://github.com/EmilHvitfeldt/paletteer), and all associated sub-packages (with original palettes) mentioned in the [LICENSE](LICENSE.note) file.
 
 <br><br>
 
@@ -44,11 +38,12 @@ conda install conda-forge::pypalettes
 
 ## Quick start
 
-Once `pypalettes` is imported, all the palettes are now accessible as
-any other colormap in matplotlib or seaborn via the `palette` or `cmap`
-arguments.
+`pypalettes` primarly offers 2 functions:
 
-#### Continuous palette
+- `load_palette("palette_name")`: loads a list of colors (dependency-free)
+- `load_cmap("palette_name")`: loads a colormap object (for matplotlib/seaborn/etc)
+
+#### Continuous colormap _for matplotlib/seaborn_
 
 ```python
 import matplotlib.pyplot as plt
@@ -70,10 +65,9 @@ plt.colorbar()
 ```python
 import matplotlib.pyplot as plt
 import seaborn as sns
-from pypalettes import load_cmap
+from pypalettes import load_palette
 
-cmap = load_cmap("Fun")
-palette = cmap.colors # return colors as a list of hexadecimal values
+palette = load_palette("Fun")
 
 df = sns.load_dataset("penguins")
 
@@ -88,7 +82,7 @@ g = sns.lmplot(
 
 ![](images/cell-3-output-1.png)
 
-#### Your own palette
+#### Your own colormap _for matplotlib/seaborn_
 
 ```python
 import matplotlib.pyplot as plt
@@ -119,8 +113,7 @@ plt.colorbar()
 - Load, customise and combine +2500 palettes
 - Create your own palettes
 
-To find out more about using PyPalettes, use this [PyPalettes
-guide](https://python-graph-gallery.com/introduction-to-pypalettes/).
+To find out more about using PyPalettes, use this [PyPalettes guide](https://python-graph-gallery.com/introduction-to-pypalettes/).
 
 <br><br>
 
@@ -148,7 +141,7 @@ _Click on the image to get the associated code!_
 
 <a href='https://python-graph-gallery.com/591-arrows-with-inflexion-point/'  target="_blank">
 <img
-         src="https://raw.githubusercontent.com/JosephBARBIERDARNAL/pypalettes/main/images/chart_example_1.png"
+         src="https://raw.githubusercontent.com/y-sunflower/pypalettes/main/images/chart_example_1.png"
          width="50%"
          alt="gapminder bubble chart"
       /> </a>

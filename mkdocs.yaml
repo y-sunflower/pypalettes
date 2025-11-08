@@ -1,6 +1,6 @@
 site_name: pypalettes
-site_url: https://JosephBARBIERDARNAL.github.io/pypalettes/
-repo_url: https://github.com/JosephBARBIERDARNAL/pypalettes
+site_url: https://y-sunflower.github.io/pypalettes/
+repo_url: https://github.com/y-sunflower/pypalettes
 
 theme:
   name: material
@@ -11,6 +11,8 @@ theme:
     - navigation.tabs
   icon:
     repo: fontawesome/brands/github
+  favicon: https://github.com/JosephBARBIERDARNAL/static/blob/main/python-libs/pypalettes/image.png?raw=true
+  logo: https://github.com/JosephBARBIERDARNAL/static/blob/main/python-libs/pypalettes/image.png?raw=true
 
 plugins:
   - search

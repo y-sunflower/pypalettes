@@ -1,94 +1,109 @@
-# pypalettes
+<br><br>
 
-<img src="https://github.com/JosephBARBIERDARNAL/static/blob/main/python-libs/pypalettes/image.png?raw=true" alt="pypalettes logo" align="right" width="150px"/>
+<div class="hero">
+<div align="center">
+  <h1 class="pypalettes">pypalettes</h1>
+</div>
 
-A large (**+2500**) collection of color maps for Python.
+<img src="https://github.com/JosephBARBIERDARNAL/static/blob/main/python-libs/pypalettes/image.png?raw=true" alt="pypalettes logo" align="right" width="120px"/>
 
-[![](https://static.pepy.tech/badge/pypalettes)](https://pepy.tech/projects/pypalettes)
+A <i>dependency-free</i> large (<b>+2500</b>) collection of <u>colormaps</u> and <u>palettes</u> for Python.
 
-<br>
+<br><br>
 
-## Quick start
+<img src="https://static.pepy.tech/badge/pypalettes" alt="total number of downloads of pypalettes"/>
 
-Let's see how to use the `"Sunset"` palette:
+</div>
 
-=== "Simple usage"
+## Get started
 
-    ```py hl_lines="9"
+`pypalettes` primarly offers 2 functions:
+
+- `load_palette("palette_name")`: loads a list of colors (dependency-free)
+- `load_cmap("palette_name")`: loads a colormap object (for matplotlib/seaborn/etc)
+
+=== "Continuous colormap"
+
+    ```py hl_lines="6"
     # mkdocs: render
     import matplotlib.pyplot as plt
     import numpy as np
     from pypalettes import load_cmap
 
-    np.random.seed(0)
+    cmap = load_cmap("Sunset2", cmap_type="continuous")
+
     data = np.random.randn(20, 20)
 
-    cmap = load_cmap("Sunset")
-
-    plt.imshow(
-      X=data,
-      cmap=cmap
-    )
+    plt.imshow(data, cmap=cmap)
     plt.colorbar()
     ```
 
-=== "Continuous palette"
+=== "Categorical palette"
 
-    ```py hl_lines="9"
+    ```py hl_lines="6"
     # mkdocs: render
     import matplotlib.pyplot as plt
-    import numpy as np
-    from pypalettes import load_cmap
+    import seaborn as sns
+    from pypalettes import load_palette
 
-    np.random.seed(0)
-    data = np.random.randn(20, 20)
+    palette = load_palette("Fun")
 
-    cmap = load_cmap("Sunset", cmap_type="continuous")
+    df = sns.load_dataset("penguins")
 
-    plt.imshow(
-      X=data,
-      cmap=cmap
+    g = sns.lmplot(
+        data=df,
+        x="bill_length_mm",
+        y="bill_depth_mm",
+        hue="species",
+        palette=palette,
     )
-    plt.colorbar()
     ```
 
-=== "Reverse palette"
+=== "Your own colormap"
 
-    ```py hl_lines="9"
+    ```py hl_lines="6 7 8 9"
     # mkdocs: render
     import matplotlib.pyplot as plt
+    from pypalettes import create_cmap
     import numpy as np
-    from pypalettes import load_cmap
 
-    np.random.seed(0)
-    data = np.random.randn(20, 20)
-
-    cmap = load_cmap("Sunset", reverse=True)
-
-    plt.imshow(
-      X=data,
-      cmap=cmap
+    cmap = create_cmap(
+        colors=["#D57A6DFF", "#E8B762FF", "#9CCDDFFF", "#525052FF"],
+        cmap_type="continuous",
     )
+
+    x = np.linspace(0, 20, 1000)
+    y = np.sin(x)
+
+    plt.scatter(x, y, c=y, cmap=cmap)
     plt.colorbar()
     ```
-
-> The `"Sunset"` is just one of 2500+ available palettes from `pypalettes`.
 
 - [**See all palettes**](https://python-graph-gallery.com/color-palette-finder/){target="\_blank"}
-- [**More examples**](./examples)
+- [**More examples**](./examples.md)
 
 ## Installation
 
-=== "stable"
+=== "pip"
 
     ```bash
     pip install pypalettes
     ```
 
-=== "dev"
+=== "conda"
 
     ```bash
-    pip install git+https://github.com/JosephBARBIERDARNAL/pypalettes.git
+    conda install conda-forge::pypalettes
     ```
+
+## Acknowledgements
+
+`PyPalettes` is **highly** inspired (and relies on for the first one)
+from
+
+- the R package [paletteer](https://github.com/EmilHvitfeldt/paletteer)
+- the python library [palettable](https://github.com/jiffyclub/palettable)
+
+A big thanks to [Yan Holtz](https://www.yan-holtz.com/) for creating the Color Palette Finder, a [web app for browsing palettes](https://python-graph-gallery.com/color-palette-finder/)
 
 <br><br>
