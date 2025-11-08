@@ -26,13 +26,6 @@ requires = [
 ]
 build-backend = "setuptools.build_meta"
 
-[tool.setuptools]
-packages = ["pypalettes"]
-include-package-data = true
-
-[tool.uv.sources]
-pypalettes = { workspace = true }
-
 [dependency-groups]
 dev = [
     "bs4>=0.0.2",
@@ -49,11 +42,6 @@ dev = [
     "plotnine>=0.14.6",
     "ty>=0.0.1a25",
 ]
-quarto = [
-    "jupyter>=1.1.1",
-    "nbclient>=0.10.2",
-    "nbformat>=5.10.4",
-]
 
 [project.urls]
 Homepage = "https://python-graph-gallery.com/color-palette-finder/"
@@ -63,3 +51,13 @@ Repository = "https://github.com/JosephBARBIERDARNAL/pypalettes"
 
 [tool.ruff]
 extend-exclude = ["tests", "parsers"]
+
+[tool.setuptools]
+packages = ["pypalettes"]
+include-package-data = true
+
+[tool.uv.sources]
+pypalettes = { workspace = true }
+
+[tool.ty.src]
+exclude = ["tests"]
