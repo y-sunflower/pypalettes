@@ -6,7 +6,7 @@ from .deprecated import get_source, get_hex, get_rgb, get_kind, add_cmap
 
 from typing import Literal
 
-__version__: Literal["0.2.0"] = "0.2.0"
+__version__: Literal["0.2.1"] = "0.2.1"
 __all__: list[str] = [
     "load_cmap",
     "load_palette",
