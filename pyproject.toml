@@ -1,6 +1,6 @@
 [project]
 name = "pypalettes"
-version = "0.1.6"
+version = "0.2.0"
 description = "A dependency-free large (+2500) collection of colormaps and palettes for Python."
 license-files = ["LICENSE.note"]
 keywords = ["palette", "colormap", "cmap", "matplotlib", "dataviz", "visualization", "seaborn", "plotly", "bokeh", "altair"]
