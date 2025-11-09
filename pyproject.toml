@@ -3,7 +3,7 @@ name = "pypalettes"
 version = "0.2.0"
 description = "A dependency-free large (+2500) collection of colormaps and palettes for Python."
 license-files = ["LICENSE.note"]
-keywords = ["palette", "colormap", "cmap", "matplotlib", "dataviz", "visualization", "seaborn", "plotly", "bokeh", "altair"]
+keywords = ["palette", "colormap", "cmap", "matplotlib", "dataviz", "visualization", "seaborn", "plotly", "bokeh", "altair", "collection"]
 authors = [
   { name="Joseph Barbier", email="joseph.barbierdarnal@gmail.com" },
 ]
