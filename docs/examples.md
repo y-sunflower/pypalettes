@@ -2,7 +2,8 @@
 
 `pypalettes` offers 3 functions:
 
-- [`load_cmap()`](./reference/load_cmap.md){target="\_blank"}: the core function that loads a colormap from one of the 2500+ available palettes. All available palettes can be found in the [Color Palette Finder](https://python-graph-gallery.com/color-palette-finder/){target="\_blank"}.
+- [`load_palette()`](./reference/load_palette.md){target="\_blank"}: the core function that loads a **palette** from one of the 2500+ available palettes. All available palettes can be found in the [Color Palette Finder](https://python-graph-gallery.com/color-palette-finder/){target="\_blank"}.
+- [`load_cmap()`](./reference/load_cmap.md){target="\_blank"}: the core function that loads a **colormap** (matplotlib color object) from one of the 2500+ available palettes. All available palettes can be found in the [Color Palette Finder](https://python-graph-gallery.com/color-palette-finder/){target="\_blank"}.
 - [`create_cmap()`](./reference/create_cmap.md){target="\_blank"}: a function to create your own colormaps from a list of colors.
 - [`show_cmap()`](./reference/show_cmap.md){target="\_blank"}: a function to preview the colors of a given palette.
 
@@ -38,15 +39,16 @@ fig, ax = plt.subplots()
 ax.scatter(x, y, c=c, s=500, cmap=cmap)
 ```
 
+## `load_palette()`
+
 - In seaborn
 
 ```py
 # mkdocs: render
 import seaborn as sns
-from pypalettes import load_cmap
+from pypalettes import load_palette
 
-cmap = load_cmap("Fun")
-palette = cmap.colors # list of colors
+palette = load_palette("Fun") # list of colors
 
 df = sns.load_dataset("penguins")
 
@@ -65,14 +67,14 @@ g = sns.lmplot(
 # mkdocs: render
 import pandas as pd
 from plotnine import ggplot, aes, geom_bar, theme_minimal, scale_fill_gradientn
-from pypalettes import load_cmap
+from pypalettes import load_palette
 
 df = pd.DataFrame({
     "category": ["A", "B", "C", "D", "E"],
     "value": [10, 15, 7, 12, 20]
 })
 
-colors = load_cmap("Arches2", reverse=True).colors
+colors = load_palette("Arches2", reverse=True)
 
 (
     ggplot(df, aes(x="category", y="value", fill="value"))

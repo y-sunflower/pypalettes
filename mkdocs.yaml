@@ -8,7 +8,8 @@ theme:
   features:
     - content.code.copy
     - navigation.path
-    - navigation.tabs
+    - content.footnote.tooltips
+    - navigation.expand
   icon:
     repo: fontawesome/brands/github
   favicon: https://github.com/JosephBARBIERDARNAL/static/blob/main/python-libs/pypalettes/image.png?raw=true
@@ -30,6 +31,7 @@ nav:
   - Home: index.md
   - Examples: examples.md
   - Reference:
+      - reference/load_palette.md
       - reference/load_cmap.md
       - reference/create_cmap.md
       - reference/show_cmap.md
