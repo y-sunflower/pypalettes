@@ -318,6 +318,50 @@ class TestLoadCmap:
         with pytest.raises(ValueError):
             load_cmap(name="invalid_name").kind
 
+    def test_load_cmap_remove_single(self):
+        """Test removing a single color by index"""
+        cmap = load_cmap(name="ClaudeMonet", remove=2)
+        assert cmap.colors == [
+            "#184430FF",
+            "#548150FF",
+            "#734321FF",
+            "#852419FF",
+        ]
+        assert len(cmap.colors) == 4
 
-if __name__ == "__main__":
-    pytest.main()
+    def test_load_cmap_remove_multiple(self):
+        """Test removing multiple colors by index"""
+        cmap = load_cmap(name="ClaudeMonet", remove=[1, 3])
+        assert cmap.colors == [
+            "#184430FF",
+            "#DEB738FF",
+            "#852419FF",
+        ]
+        assert len(cmap.colors) == 3
+
+    def test_load_cmap_remove_with_reverse(self):
+        """Test remove combined with reverse"""
+        cmap = load_cmap(name="ClaudeMonet", reverse=True, remove=0)
+        expected = [
+            "#734321FF",
+            "#DEB738FF",
+            "#548150FF",
+            "#184430FF",
+        ]
+        assert cmap.colors == expected
+
+    def test_load_cmap_remove_invalid_index(self):
+        """Test that invalid indices raise appropriate errors"""
+        with pytest.raises(ValueError, match="out of range"):
+            load_cmap(name="ClaudeMonet", remove=10)
+
+        with pytest.raises(ValueError, match="non-negative"):
+            load_cmap(name="ClaudeMonet", remove=-1)
+
+    def test_load_cmap_remove_invalid_type(self):
+        """Test that invalid types raise appropriate errors"""
+        with pytest.raises(TypeError, match="remove must be an int or list of ints"):
+            load_cmap(name="ClaudeMonet", remove="2")
+
+        with pytest.raises(TypeError, match="remove must be an int or list of ints"):
+            load_cmap(name="ClaudeMonet", remove=[1, "2"])

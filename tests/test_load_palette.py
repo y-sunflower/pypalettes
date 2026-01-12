@@ -46,3 +46,75 @@ def test_load_palette_random(shuffle, repeat, keep_first_n, reverse):
         )
         assert isinstance(palette, list)
         assert all(isinstance(color, str) for color in palette)
+
+
+def test_load_palette_remove_single():
+    """Test removing a single color by index"""
+    palette = load_palette("Acadia", remove=2)
+    assert palette == [
+        "#FED789FF",
+        "#023743FF",
+        "#476F84FF",
+        "#A4BED5FF",
+        "#453947FF",
+    ]
+    assert len(palette) == 5
+
+
+def test_load_palette_remove_multiple():
+    """Test removing multiple colors by index"""
+    palette = load_palette("Acadia", remove=[1, 3])
+    assert palette == [
+        "#FED789FF",
+        "#72874EFF",
+        "#A4BED5FF",
+        "#453947FF",
+    ]
+    assert len(palette) == 4
+
+
+def test_load_palette_remove_first_and_last():
+    """Test removing first and last colors"""
+    palette = load_palette("Acadia", remove=[0, 5])
+    assert palette == [
+        "#023743FF",
+        "#72874EFF",
+        "#476F84FF",
+        "#A4BED5FF",
+    ]
+    assert len(palette) == 4
+
+
+def test_load_palette_remove_with_reverse():
+    """Test remove combined with reverse"""
+    # First reverse, then remove
+    palette = load_palette("Acadia", reverse=True, remove=0)
+    expected = [
+        "#A4BED5FF",
+        "#476F84FF",
+        "#72874EFF",
+        "#023743FF",
+        "#FED789FF",
+    ]
+    assert palette == expected
+
+
+def test_load_palette_remove_invalid_index():
+    """Test that invalid indices raise appropriate errors"""
+    with pytest.raises(ValueError, match="out of range"):
+        load_palette("Acadia", remove=10)
+
+    with pytest.raises(ValueError, match="non-negative"):
+        load_palette("Acadia", remove=-1)
+
+    with pytest.raises(ValueError, match="out of range"):
+        load_palette("Acadia", remove=[0, 10])
+
+
+def test_load_palette_remove_invalid_type():
+    """Test that invalid types raise appropriate errors"""
+    with pytest.raises(TypeError, match="remove must be an int or list of ints"):
+        load_palette("Acadia", remove="2")
+
+    with pytest.raises(TypeError, match="remove must be an int or list of ints"):
+        load_palette("Acadia", remove=[1, "2"])

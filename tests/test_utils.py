@@ -91,6 +91,6 @@ def test_get_palette_errors():
         _get_palette("Acadia", keep_first_n=3, keep_last_n=2)
 
     with pytest.warns(
-        match="`keep_first_n`, `keep_last_n` and `keep` arguments are ignored when `name` is a list."
+        match="`keep_first_n`, `keep_last_n`, `keep` and `remove` arguments are ignored when `name` is a list."
     ):
         _get_palette(["Acadia", "Sunset"], keep_first_n=3, repeat=2)

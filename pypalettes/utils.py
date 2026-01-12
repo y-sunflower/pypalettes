@@ -31,6 +31,7 @@ def _get_one_palette(
     keep_first_n: Optional[int] = None,
     keep_last_n: Optional[int] = None,
     keep: Optional[list[bool]] = None,
+    remove: Optional[Union[int, list[int]]] = None,
 ) -> dict:
     """
     Get one palette from name.
@@ -46,6 +47,8 @@ def _get_one_palette(
         Keep only the last n colors of the palette
     - keep
         Specify which colors to keep in the palette
+    - remove
+        Remove colors at specified indices (0-indexed). Can be a single int or list of ints.
     """
     palettes = _load_palettes()
     palette_dict: dict = dict()
@@ -82,6 +85,18 @@ def _get_one_palette(
             f"keep list must be the same length as the palette ({len(hex_list)}!={len(keep)})."
         )
 
+    if remove is not None:
+        remove_indices = [remove] if isinstance(remove, int) else remove
+        for idx in remove_indices:
+            if not isinstance(idx, int):
+                raise TypeError(
+                    f"remove indices must be integers, not {type(idx).__name__}."
+                )
+            if idx < 0 or idx >= len(hex_list):
+                raise ValueError(
+                    f"remove index {idx} is out of range. Must be between 0 and {len(hex_list) - 1}."
+                )
+
     if reverse:
         hex_list: list = hex_list[::-1]
 
@@ -92,6 +107,13 @@ def _get_one_palette(
     elif keep is not None:
         hex_list: list = [
             color for color, keep_color in zip(hex_list, keep) if keep_color
+        ]
+
+    if remove is not None:
+        remove_indices = [remove] if isinstance(remove, int) else remove
+        remove_set = set(remove_indices)
+        hex_list: list = [
+            color for idx, color in enumerate(hex_list) if idx not in remove_set
         ]
 
     palette_dict["palette"] = palette
@@ -110,6 +132,7 @@ def _get_palette(
     keep_last_n: Optional[int] = None,
     keep: Optional[list[bool]] = None,
     repeat: int = 1,
+    remove: Optional[Union[int, list[int]]] = None,
 ) -> dict:
     """
     Get palette from name.
@@ -127,6 +150,8 @@ def _get_palette(
         Specify which colors to keep in the palette
     - repeat
         The number of times the palette must be present in the output. Used to access larger palettes that are repeated.
+    - remove
+        Remove colors at specified indices (0-indexed). Can be a single int or list of ints.
     """
     if not isinstance(reverse, bool):
         raise TypeError("reverse must be a boolean.")
@@ -147,6 +172,17 @@ def _get_palette(
             "Cannot specify more than one of keep_first_n, keep_last_n, "
             "and keep arguments simultaneously."
         )
+    if remove is not None:
+        if isinstance(remove, int):
+            if remove < 0:
+                raise ValueError("remove index must be non-negative.")
+        elif isinstance(remove, list):
+            if not all(isinstance(idx, int) for idx in remove):
+                raise TypeError("remove must be an int or list of ints.")
+            if any(idx < 0 for idx in remove):
+                raise ValueError("remove indices must be non-negative.")
+        else:
+            raise TypeError("remove must be an int or list of ints.")
     if not repeat >= 1 or not isinstance(repeat, int):
         raise TypeError("repeat must be a positive integer.")
 
@@ -157,12 +193,13 @@ def _get_palette(
             keep_first_n=keep_first_n,
             keep_last_n=keep_last_n,
             keep=keep,
+            remove=remove,
         )
     elif isinstance(name, list):
-        for param in [keep_first_n, keep_last_n, keep]:
+        for param in [keep_first_n, keep_last_n, keep, remove]:
             if param is not None:
                 warnings.warn(
-                    "`keep_first_n`, `keep_last_n` and `keep` arguments"
+                    "`keep_first_n`, `keep_last_n`, `keep` and `remove` arguments"
                     " are ignored when `name` is a list."
                 )
         hex_list: list = []
