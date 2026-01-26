@@ -15,6 +15,7 @@ classifiers = [
     "Operating System :: OS Independent",
     "Framework :: Matplotlib"
 ]
+dependencies = []
 
 [build-system]
 requires = [
@@ -58,3 +59,7 @@ pypalettes = { workspace = true }
 
 [tool.ty.src]
 exclude = ["tests"]
+
+[tool.piecheck]
+max-file-size-mb = 1.5
+ignore-undeclared-dependencies = ["matplotlib", "PIL"]

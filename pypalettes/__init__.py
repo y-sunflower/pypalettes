@@ -1,8 +1,8 @@
-from .load_cmap import load_cmap
-from .load_palette import load_palette
-from .create_cmap import create_cmap
-from .show_cmap import show_cmap
-from .deprecated import get_source, get_hex, get_rgb, get_kind, add_cmap
+from pypalettes.load_cmap import load_cmap
+from pypalettes.load_palette import load_palette
+from pypalettes.create_cmap import create_cmap
+from pypalettes.show_cmap import show_cmap
+from pypalettes.deprecated import get_source, get_hex, get_rgb, get_kind, add_cmap
 
 from typing import Literal
 
