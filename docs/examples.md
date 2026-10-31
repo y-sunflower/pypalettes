@@ -103,6 +103,8 @@ fig = px.scatter(
 fig.show()
 ```
 
+![](./plotly-example.png)
+
 - In Altair
 
 ```py
@@ -130,6 +132,8 @@ df = pd.DataFrame(
     )
 )
 ```
+
+![](./altair-example.png)
 
 ## `create_cmap()`
 
