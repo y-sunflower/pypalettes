@@ -103,7 +103,7 @@ fig = px.scatter(
 fig.show()
 ```
 
-![](./plotly-example.png)
+![Plotly scatter plot of tip versus total bill from the tips dataset, with points colored by day using the Fun palette](./plotly-example.png)
 
 - In Altair
 
@@ -133,7 +133,7 @@ df = pd.DataFrame(
 )
 ```
 
-![](./altair-example.png)
+![Altair scatter plot of five points, colored by category A, B and C using the first three colors of the Fun palette](./altair-example.png)
 
 ## `create_cmap()`
 
