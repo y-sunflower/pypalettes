@@ -13,6 +13,7 @@ A _dependency-free_ large (**+2500**) collection of colormaps and palettes for P
 
 [![](https://static.pepy.tech/badge/pypalettes)](https://pepy.tech/projects/pypalettes)
 ![Coverage badge](docs/coverage-badge.svg)
+![Python Versions](https://img.shields.io/badge/Python-3.10–3.15-blue)
 
 ![](pypalettes.gif)
 

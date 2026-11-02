@@ -12,6 +12,7 @@ A <i>dependency-free</i> large (<b>+2500</b>) collection of <u>colormaps</u> and
 <br><br>
 
 <img src="https://static.pepy.tech/badge/pypalettes" alt="total number of downloads of pypalettes"/>
+<img src="https://img.shields.io/badge/Python-3.10–3.15-blue" alt="Python 3.10 and 3.15 badges"/>
 
 </div>
 
