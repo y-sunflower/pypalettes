@@ -7,7 +7,7 @@
 - [`create_cmap()`](./reference/create_cmap.md){target="\_blank"}: a function to create your own colormaps from a list of colors.
 - [`show_cmap()`](./reference/show_cmap.md){target="\_blank"}: a function to preview the colors of a given palette.
 
-Since those functions are built for matplotlib, they work with **any matplotlib-based plotting library** (seaborn, plotnine, (geo)pandas, cartopy, statsmodels, etc).
+Since those functions are built for matplotlib, they work with **any matplotlib-based plotting library** (seaborn, plotnine, (geo)pandas, cartopy, statsmodels, etc). For **Altair** and **Plotly**, pass the list of colors from `load_palette()` into each library's color scale API (see examples below).
 
 Also, you have to understand the **difference** between a _palette_ and a _colormap_ (or cmap).
 
@@ -82,6 +82,58 @@ colors = load_palette("Arches2", reverse=True)
 ```
 
 ![](./plotnine-example.png)
+
+- In Plotly
+
+```py
+import plotly.express as px
+from pypalettes import load_palette
+
+palette = load_palette("Fun")
+
+df = px.data.tips()
+
+fig = px.scatter(
+    df,
+    x="total_bill",
+    y="tip",
+    color="day",
+    color_discrete_sequence=palette,
+)
+fig.show()
+```
+
+![Plotly scatter plot of tip versus total bill from the tips dataset, with points colored by day using the Fun palette](./plotly-example.png)
+
+- In Altair
+
+```py
+import altair as alt
+import pandas as pd
+from pypalettes import load_palette
+
+palette = load_palette("Fun")
+
+df = pd.DataFrame(
+    {
+        "x": [1, 2, 3, 4, 5],
+        "y": [2, 3, 1, 4, 2],
+        "category": ["A", "B", "A", "C", "B"],
+    }
+)
+
+(
+    alt.Chart(df)
+    .mark_circle(size=200)
+    .encode(
+        x="x:Q",
+        y="y:Q",
+        color=alt.Color("category:N", scale=alt.Scale(range=palette)),
+    )
+)
+```
+
+![Altair scatter plot of five points, colored by category A, B and C using the first three colors of the Fun palette](./altair-example.png)
 
 ## `create_cmap()`
 
